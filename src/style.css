@@ -1,3 +1,69 @@
+html,
 body {
-    background-color: blue;
+  width: 60%;
+  margin: auto;
+  position: fixed;
+  top: 20%;
+  left: 30%;
+  transform: translate(-20%, -30%);
+}
+
+#toDoList {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 4px;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 255, 0.2);
+}
+
+.title-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.container > form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid rgba(0, 0, 255, 0.2);
+  padding: 20px;
+}
+
+.container > form > .input {
+  border: none;
+  font-style: italic;
+}
+
+.container > form > .button-list {
+  border: 1px solid rgba(210, 210, 230, 0.2);
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.list-section {
+  max-width: 100%;
+  border: 1px solid rgba(175, 175, 187, 0.733);
+  margin: 0;
+  padding: 0;
+}
+
+.list-section > li {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid rgba(175, 175, 187, 0.733);
+  max-width: 100%;
+  padding: 0 20px;
+}
+
+.container > .clear-all {
+  border: 1px solid rgba(242, 242, 248, 0.918);
+  max-width: 100%;
+  padding: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 16px;
+  color: rgba(138, 138, 148, 0.733);
 }

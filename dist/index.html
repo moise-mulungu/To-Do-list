@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wbpack Exercise</title>
+    <title>To Do list</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script defer src="index.js"></script></head>
 <body>
-    <h1>Hello webpack!</h1>
-    <p>menu</p>
+    <div class="container" id="toDoList">
+        <div class="title-list" id="titleList">
+            <i class="fa-solid fa-arrows-rotate"></i>
+            
+        </div>
+        <form id="inputContent" method="get">
+            <input type="text" class="input" placeholder="Add something">
+            <button type="submit" class="button-list" id="buttonList"> + </button>
+        </form>
+    </div>
 </body>
 </html>
