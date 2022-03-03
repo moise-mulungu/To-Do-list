@@ -350,7 +350,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "html,\nbody {\n  width: 60%;\n  margin: auto;\n  position: fixed;\n  top: 20%;\n  left: 30%;\n  transform: translate(-20%, -30%);\n}\n\n#toDoList {\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  border-radius: 4px;\n  box-shadow: 5px 5px 5px 5px rgba(0, 0, 255, 0.2);\n}\n\n.title-list {\n  display: flex;\n  flex-direction: row-reverse;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 20px;\n}\n\n.container > form {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  border: 1px solid rgba(0, 0, 255, 0.2);\n  padding: 20px;\n}\n\n.container > form > .input {\n  border: none;\n  font-style: italic;\n}\n\n.container > form > .button-list {\n  border: 1px solid rgba(210, 210, 230, 0.2);\n  padding: 4px;\n  border-radius: 4px;\n}\n\n.list-section {\n  max-width: 100%;\n  border: 1px solid rgba(175, 175, 187, 0.733);\n  margin: 0;\n  padding: 0;\n}\n\n.list-section > li {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  border-bottom: 1px solid rgba(175, 175, 187, 0.733);\n  max-width: 100%;\n  padding: 0 20px;\n}\n\n.list-section > li > .checkbox {\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n}\n\n.container > .clear-all {\n  border: 1px solid rgba(242, 242, 248, 0.918);\n  max-width: 100%;\n  padding: 20px;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  font-size: 16px;\n  color: rgba(138, 138, 148, 0.733);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "html,\nbody {\n  width: 60%;\n  margin: auto;\n  position: fixed;\n  top: 20%;\n  left: 30%;\n  transform: translate(-20%, -30%);\n}\n\n#toDoList {\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  border-radius: 4px;\n  box-shadow: 5px 5px 5px 5px rgba(0, 0, 255, 0.2);\n}\n\n.title-list {\n  display: flex;\n  flex-direction: row-reverse;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 20px;\n}\n\n.container > form {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  border: 1px solid rgba(0, 0, 255, 0.2);\n  padding: 20px;\n}\n\n.container > form > .input {\n  border: none;\n  font-style: italic;\n}\n\n.container > form > .button-list {\n  border: 1px solid rgba(210, 210, 230, 0.2);\n  padding: 6px;\n  border-radius: 10px;\n}\n\n.list-section {\n  max-width: 100%;\n  border: 1px solid rgba(175, 175, 187, 0.733);\n  margin: 0;\n  padding: 0;\n}\n\n.list-section > li {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  border-bottom: 1px solid rgba(175, 175, 187, 0.733);\n  max-width: 100%;\n  padding: 0 20px;\n}\n\n.list-section > li > .checkbox {\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n}\n\n.container > .clear-all {\n  border: 1px solid rgba(242, 242, 248, 0.918);\n  max-width: 100%;\n  padding: 20px;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  font-size: 16px;\n  color: rgba(138, 138, 148, 0.733);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -556,9 +556,7 @@ const heading = document.createElement('h1');
 heading.classList.add('head');
 heading.textContent = 'To-Do list';
 topSection.appendChild(heading);
-// const formSection = document.getElementById('InputContent');
 
-// const buttonList = document.getElementById('buttonList');
 const divList = document.createElement('div');
 divList.id = 'div-list';
 toDoContainer.appendChild(divList);
@@ -567,20 +565,15 @@ const listItems = document.createElement('ul');
 listItems.classList.add('list-section');
 divList.appendChild(listItems);
 
-// const list = document.createElement('li');
-// list.classList.add('list-self');
-// console.log(list);
-// listItems.appendChild(list);
-
 const clearButton = document.createElement('button');
 clearButton.classList.add('clear-all');
 clearButton.type = 'button';
-clearButton.textContent = 'clear all completed';
+clearButton.textContent = 'Clear all completed';
 toDoContainer.appendChild(clearButton);
 
 const todo = [
   {
-    description: 'walk',
+    description: 'work',
     completed: false,
     index: 1,
   },
@@ -590,18 +583,96 @@ const todo = [
     index: 2,
   },
 ];
-for (let i = 0; i < 2; i += 1) {
+
+const addToLocalStorage = () => {
+  localStorage.setItem('newTasks', JSON.stringify(todo));
+}
+
+let getFromLocalStorage = () => {
+  if (localStorage.getItem('newTasks')) {
+    todo = JSON.parse(localStorage.getItem('newTasks'));
+  }
+  return todo;
+
+
+}
+const displayTasks = () => {
+  toDoContainer.innerHTML = '';
+  let mylocal = getFromLocalStorage();
+
+  mylocal.forEach((tsk) => {
+    const li = document.createElement('li');
+    const checkbox = document.createElement('input');
+    checkbox.setAttribute('type', 'checkbox');
+    if (tsk.checked === true) {
+      checkbox.setAttribute('checked', 'checked');
+    }
+    checkbox.addEventListener('change', (e) => {
+      e.preventDefault();
+      setState(tasks, e.target, tsk.index);
+      addToLocalStorage();
+    });
+
+    const taskDesc = document.createElement('input');
+    taskDesc.classList.add('todotask');
+    taskDesc.value = tsk.description;
+    const deleteTask = document.createElement('i');
+    taskDesc.addEventListener('change', (e) => {
+      e.preventDefault();
+      editTask(e.target.value, tsk.index);
+      taskDesc.blur();
+    });
+    deleteTask.classList.add('fas', 'fa-ellipsis-v');
+    deleteTask.addEventListener('click', () => {
+      // rmvTask(tsk.index);
+      // resetIndex(mylocal);
+      addToLocalStorage();
+      displayTasks();
+    });
+
+    li.append(checkbox, taskDesc, deleteTask);
+    toDoContainer.appendChild(li);
+  });
+};
+
+
+const addButton = document.querySelector('.button-list');
+const inputField = document.querySelector('.input');
+
+const addTodo = () => {
+  let lengt = todo.length;
+    todo.push({
+        index: lengt +1,
+        description: inputField.value,
+        completed: false,
+  });
+  addToLocalStorage();
+  inputField.value = '';
+}
+
+for (let i = 0; i < todo.length; i += 1) {
   const addTodo = todo[i];
   listItems.innerHTML += `
-     <li class="item">
-     <div class= "checkbox">
-     <input type="checkbox" class="ch"></input>
-     <p class="text">${addTodo.description}</p>
-     </div>
-     <span><i class="fa-solid fa-ellipsis-vertical"></i></span>
-     </li>
-     `;
+      <li class="item">
+      <div class= "checkbox">
+      <input type="checkbox" class="ch"></input>
+      <p class="text">${addTodo.description}</p>
+      </div>
+      <span><i class="fa-solid fa-ellipsis-vertical"></i></span>
+      </li>
+      `;
 }
+
+
+addButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  addTodo();
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+  getFromLocalStorage();
+  displayTasks();
+});
 
 })();
 
