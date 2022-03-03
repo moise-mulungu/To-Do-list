@@ -350,7 +350,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "html,\nbody {\n  width: 60%;\n  margin: auto;\n  position: fixed;\n  top: 20%;\n  left: 30%;\n  transform: translate(-20%, -30%);\n}\n\n#toDoList {\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  border-radius: 4px;\n  box-shadow: 5px 5px 5px 5px rgba(0, 0, 255, 0.2);\n}\n\n.title-list {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  padding: 0 20px;\n}\n\n.container > form {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  border: 1px solid rgba(0, 0, 255, 0.2);\n  padding: 20px;\n}\n\n.container > form > .input {\n  border: none;\n  font-style: italic;\n}\n\n.container > form > .button-list {\n  border: 1px solid rgba(210, 210, 230, 0.2);\n  padding: 4px;\n  border-radius: 4px;\n}\n\n.list-section {\n  max-width: 100%;\n  border: 1px solid rgba(175, 175, 187, 0.733);\n  margin: 0;\n  padding: 0;\n}\n\n.list-section > li {\n  display: flex;\n  flex-direction: row;\n  justify-content: flex-start;\n  align-items: center;\n  border-bottom: 1px solid rgba(175, 175, 187, 0.733);\n  max-width: 100%;\n  padding: 0 20px;\n}\n\n.container > .clear-all {\n  border: 1px solid rgba(242, 242, 248, 0.918);\n  max-width: 100%;\n  padding: 20px;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  font-size: 16px;\n  color: rgba(138, 138, 148, 0.733);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "html,\nbody {\n  width: 60%;\n  margin: auto;\n  position: fixed;\n  top: 20%;\n  left: 30%;\n  transform: translate(-20%, -30%);\n}\n\n#toDoList {\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  border-radius: 4px;\n  box-shadow: 5px 5px 5px 5px rgba(0, 0, 255, 0.2);\n}\n\n.title-list {\n  display: flex;\n  flex-direction: row-reverse;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 20px;\n}\n\n.container > form {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  border: 1px solid rgba(0, 0, 255, 0.2);\n  padding: 20px;\n}\n\n.container > form > .input {\n  border: none;\n  font-style: italic;\n}\n\n.container > form > .button-list {\n  border: 1px solid rgba(210, 210, 230, 0.2);\n  padding: 4px;\n  border-radius: 4px;\n}\n\n.list-section {\n  max-width: 100%;\n  border: 1px solid rgba(175, 175, 187, 0.733);\n  margin: 0;\n  padding: 0;\n}\n\n.list-section > li {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  border-bottom: 1px solid rgba(175, 175, 187, 0.733);\n  max-width: 100%;\n  padding: 0 20px;\n}\n\n.list-section > li > .checkbox {\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n}\n\n.container > .clear-all {\n  border: 1px solid rgba(242, 242, 248, 0.918);\n  max-width: 100%;\n  padding: 20px;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  font-size: 16px;\n  color: rgba(138, 138, 148, 0.733);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -594,9 +594,11 @@ for (let i = 0; i < 2; i += 1) {
   const addTodo = todo[i];
   listItems.innerHTML += `
      <li class="item">
+     <div class= "checkbox">
      <input type="checkbox" class="ch"></input>
      <p class="text">${addTodo.description}</p>
-     <i class="fa-solid fa-ellipsis-vertical"></i>
+     </div>
+     <span><i class="fa-solid fa-ellipsis-vertical"></i></span>
      </li>
      `;
 }

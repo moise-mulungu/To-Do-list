@@ -9,7 +9,7 @@
 
 > This my To-Do list first project. 
 
-![screenshot](img/to-do.png).
+![screenshot](img/todo.png).
 
 ## Built With
 
@@ -22,9 +22,9 @@
 
 ## Live Demo
 
-[github page](https://github.com/moise-mulungu/my-awesome-books-modules)
+[github page](https://github.com/moise-mulungu/To-Do-list)
 
-[live demo](http://127.0.0.1:5501/index.html)
+[live demo]( https://moise-mulungu.github.io/To-Do-list/)
 
 ## Getting Started
 

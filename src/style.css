@@ -18,8 +18,9 @@ body {
 
 .title-list {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   justify-content: space-between;
+  align-items: center;
   padding: 0 20px;
 }
 
@@ -52,11 +53,17 @@ body {
 .list-section > li {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid rgba(175, 175, 187, 0.733);
   max-width: 100%;
   padding: 0 20px;
+}
+
+.list-section > li > .checkbox {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .container > .clear-all {

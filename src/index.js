@@ -8,9 +8,7 @@ const heading = document.createElement('h1');
 heading.classList.add('head');
 heading.textContent = 'To-Do list';
 topSection.appendChild(heading);
-// const formSection = document.getElementById('InputContent');
 
-// const buttonList = document.getElementById('buttonList');
 const divList = document.createElement('div');
 divList.id = 'div-list';
 toDoContainer.appendChild(divList);
@@ -18,11 +16,6 @@ toDoContainer.appendChild(divList);
 const listItems = document.createElement('ul');
 listItems.classList.add('list-section');
 divList.appendChild(listItems);
-
-// const list = document.createElement('li');
-// list.classList.add('list-self');
-// console.log(list);
-// listItems.appendChild(list);
 
 const clearButton = document.createElement('button');
 clearButton.classList.add('clear-all');
@@ -46,9 +39,11 @@ for (let i = 0; i < 2; i += 1) {
   const addTodo = todo[i];
   listItems.innerHTML += `
      <li class="item">
+     <div class= "checkbox">
      <input type="checkbox" class="ch"></input>
      <p class="text">${addTodo.description}</p>
-     <i class="fa-solid fa-ellipsis-vertical"></i>
+     </div>
+     <span><i class="fa-solid fa-ellipsis-vertical"></i></span>
      </li>
      `;
 }
