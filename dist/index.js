@@ -571,103 +571,108 @@ clearButton.type = 'button';
 clearButton.textContent = 'Clear all completed';
 toDoContainer.appendChild(clearButton);
 
-const todo = [
-  {
-    description: 'work',
-    completed: false,
-    index: 1,
-  },
-  {
-    description: 'work-out',
-    completed: false,
-    index: 2,
-  },
+let todo = [
 ];
 
 const addToLocalStorage = () => {
   localStorage.setItem('newTasks', JSON.stringify(todo));
-}
+};
 
-let getFromLocalStorage = () => {
+const getFromLocalStorage = () => {
   if (localStorage.getItem('newTasks')) {
     todo = JSON.parse(localStorage.getItem('newTasks'));
   }
   return todo;
-
-
-}
-const displayTasks = () => {
-  toDoContainer.innerHTML = '';
-  let mylocal = getFromLocalStorage();
-
-  mylocal.forEach((tsk) => {
-    const li = document.createElement('li');
-    const checkbox = document.createElement('input');
-    checkbox.setAttribute('type', 'checkbox');
-    if (tsk.checked === true) {
-      checkbox.setAttribute('checked', 'checked');
-    }
-    checkbox.addEventListener('change', (e) => {
-      e.preventDefault();
-      setState(tasks, e.target, tsk.index);
-      addToLocalStorage();
-    });
-
-    const taskDesc = document.createElement('input');
-    taskDesc.classList.add('todotask');
-    taskDesc.value = tsk.description;
-    const deleteTask = document.createElement('i');
-    taskDesc.addEventListener('change', (e) => {
-      e.preventDefault();
-      editTask(e.target.value, tsk.index);
-      taskDesc.blur();
-    });
-    deleteTask.classList.add('fas', 'fa-ellipsis-v');
-    deleteTask.addEventListener('click', () => {
-      // rmvTask(tsk.index);
-      // resetIndex(mylocal);
-      addToLocalStorage();
-      displayTasks();
-    });
-
-    li.append(checkbox, taskDesc, deleteTask);
-    toDoContainer.appendChild(li);
-  });
 };
 
+const removeFromLocalStorage = (index) => {
+  localStorage.removeItem('newTasks');
+}
+
+// const rmvTask = (index) => {
+//   const mylocal = getFromLocalStorage();
+//   mylocal.splice(index - 1, 1);
+//   addToLocalStorage();
+//   displayTasks();
+// };
 
 const addButton = document.querySelector('.button-list');
 const inputField = document.querySelector('.input');
 
+const displayTasks = () => {
+  listItems.innerHTML = '';
+  const mylocal = getFromLocalStorage();
+
+  for (let i = 0; i < mylocal.length; i += 1) {
+    const addTodo = todo[i];
+    listItems.innerHTML += `
+        <li class="item" id="${i}">
+          <div class= "checkbox">
+            <input type="checkbox" class="ch"></input>
+            <p class="text" id="textId">${addTodo.description}</p>
+          </div>
+          <span><i id="delete"class="fa-solid fa-trash"></i></span>
+        </li>
+        `;
+        
+        
+      }
+  toDoContainer.addEventListener('click', (e) =>{
+      const editText = e.target.id;
+        if (editText === 'textId') {
+          editContent(e.target)
+          console.log('hello');
+          
+        }
+      });
+      
+      
+      toDoContainer.addEventListener('click', (e) => {
+        const icon = e.target.id;
+        if (icon === 'delete') {
+          removeIcon(e.target);
+          removeFromLocalStorage(index);
+          console.log(index);
+
+        // rmvTask();
+
+
+    };
+    
+  })
+
+  // const deleteBTN = document.getElementById('delete');
+  // deleteBTN.addEventListener('click', (e) => {
+  //   console.log('hello');
+  //   if (e.target.id === 'delete') {
+  //     rmvTask(e.index);
+  //   }
+  // });
+};
+const removeIcon = (iconItem) => {
+  iconItem.parentNode.parentNode.remove();
+}
+
+const editContent = (para) => {
+  para.contentEditable = true;
+}
+
 const addTodo = () => {
-  let lengt = todo.length;
-    todo.push({
-        index: lengt +1,
-        description: inputField.value,
-        completed: false,
+  const lengt = todo.length;
+  todo.push({
+    index: lengt + 1,
+    description: inputField.value,
+    completed: false,
   });
   addToLocalStorage();
   inputField.value = '';
-}
-
-for (let i = 0; i < todo.length; i += 1) {
-  const addTodo = todo[i];
-  listItems.innerHTML += `
-      <li class="item">
-      <div class= "checkbox">
-      <input type="checkbox" class="ch"></input>
-      <p class="text">${addTodo.description}</p>
-      </div>
-      <span><i class="fa-solid fa-ellipsis-vertical"></i></span>
-      </li>
-      `;
-}
-
+};
 
 addButton.addEventListener('click', (e) => {
   e.preventDefault();
   addTodo();
-})
+  displayTasks();
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   getFromLocalStorage();

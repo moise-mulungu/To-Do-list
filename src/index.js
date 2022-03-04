@@ -1,4 +1,3 @@
-// import _ from 'lodash';
 import './style.css';
 
 const toDoContainer = document.querySelector('.container');
@@ -23,18 +22,7 @@ clearButton.type = 'button';
 clearButton.textContent = 'Clear all completed';
 toDoContainer.appendChild(clearButton);
 
-const todo = [
-  {
-    description: 'work',
-    completed: false,
-    index: 1,
-  },
-  {
-    description: 'work-out',
-    completed: false,
-    index: 2,
-  },
-];
+let todo = [];
 
 const addToLocalStorage = () => {
   localStorage.setItem('newTasks', JSON.stringify(todo));
@@ -46,48 +34,69 @@ const getFromLocalStorage = () => {
   }
   return todo;
 };
-const displayTasks = () => {
-  toDoContainer.innerHTML = '';
-  const mylocal = getFromLocalStorage();
 
-  mylocal.forEach((tsk) => {
-    const li = document.createElement('li');
-    const checkbox = document.createElement('input');
-    checkbox.setAttribute('type', 'checkbox');
-    if (tsk.checked === true) {
-      checkbox.setAttribute('checked', 'checked');
-    }
-    checkbox.addEventListener('change', (e) => {
-      e.preventDefault();
-      setState(tasks, e.target, tsk.index);
-      addToLocalStorage();
-    });
-
-    const taskDesc = document.createElement('input');
-    taskDesc.classList.add('todotask');
-    taskDesc.value = tsk.description;
-    const deleteTask = document.createElement('i');
-    taskDesc.addEventListener('change', (e) => {
-      e.preventDefault();
-      editTask(e.target.value, tsk.index);
-      taskDesc.blur();
-    });
-    deleteTask.classList.add('fas', 'fa-ellipsis-v');
-    deleteTask.addEventListener('click', () => {
-      // rmvTask(tsk.index);
-      // resetIndex(mylocal);
-      addToLocalStorage();
-      displayTasks();
-    });
-
-    li.append(checkbox, taskDesc, deleteTask);
-    toDoContainer.appendChild(li);
+const updateIndex = () => {
+  todo.map((a) => {
+    const index = todo.indexOf(a);
+    a.index = index + 1;
+    return a;
   });
 };
 
 const addButton = document.querySelector('.button-list');
 const inputField = document.querySelector('.input');
 
+const displayTasks = () => {
+  listItems.replaceChildren();
+  const mylocal = getFromLocalStorage();
+
+  for (let i = 0; i < mylocal.length; i += 1) {
+    const addTodo = todo[i];
+    listItems.innerHTML += `
+        <li class="item" id="${i}">
+          <div class= "checkbox">
+            <input type="checkbox" id="checkbox"></input>
+            <p class="text" id="textId">${addTodo.description}</p>
+          </div>
+          <span><i id="delete"class="fa-solid fa-trash"></i></span>
+        </li>
+        `;
+  }
+
+  const editContent = (para, value) => {
+    const itemId = Number(para.parentNode.parentNode.id);
+    todo[itemId].description = value;
+    addToLocalStorage();
+  };
+
+  toDoContainer.addEventListener('click', (e) => {
+    e.target.contentEditable = true;
+    document.addEventListener('keydown', (e) => {
+      if (e.target.id === 'textId') {
+        if (e.key === 'Enter') {
+          editContent(e.target, e.target.innerHTML);
+        }
+      }
+    });
+  });
+};
+
+const removeIcon = (item) => {
+  const itemId = Number(item.parentNode.parentNode.id);
+  const newId = itemId + 1;
+
+  todo = todo.filter((a) => a.index !== newId);
+  updateIndex();
+  addToLocalStorage();
+};
+
+toDoContainer.addEventListener('click', (e) => {
+  const icon = e.target.id;
+  if (icon === 'delete') {
+    removeIcon(e.target);
+    displayTasks();
+  }
+});
 const addTodo = () => {
   const lengt = todo.length;
   todo.push({
@@ -99,22 +108,10 @@ const addTodo = () => {
   inputField.value = '';
 };
 
-for (let i = 0; i < todo.length; i += 1) {
-  const addTodo = todo[i];
-  listItems.innerHTML += `
-      <li class="item">
-      <div class= "checkbox">
-      <input type="checkbox" class="ch"></input>
-      <p class="text">${addTodo.description}</p>
-      </div>
-      <span><i class="fa-solid fa-ellipsis-vertical"></i></span>
-      </li>
-      `;
-}
-
 addButton.addEventListener('click', (e) => {
   e.preventDefault();
   addTodo();
+  displayTasks();
 });
 
 document.addEventListener('DOMContentLoaded', () => {
