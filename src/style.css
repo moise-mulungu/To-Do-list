@@ -39,8 +39,8 @@ body {
 
 .container > form > .button-list {
   border: 1px solid rgba(210, 210, 230, 0.2);
-  padding: 4px;
-  border-radius: 4px;
+  padding: 6px;
+  border-radius: 10px;
 }
 
 .list-section {

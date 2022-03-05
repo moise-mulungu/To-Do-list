@@ -5,11 +5,11 @@
 
 ![](file:///home/moise/To-Do-list/dist/index.html)
 
-# To-Do list: list structure
+# To-Do list: add and remove
 
 > This my To-Do list first project. 
 
-![screenshot](img/todo.png).
+![screenshot](img/add-remove.png).
 
 ## Built With
 
@@ -34,7 +34,7 @@ git clone  https://github.com/moise-mulungu/To-Do-list
 ```
 To make how it works, use webpack dev-server from your local.
 
-in this app, you have a to-do list, where you can add and remove your complete tasks.
+in this app a user is able to add, remove and edit any task.
 
 ## Author
 

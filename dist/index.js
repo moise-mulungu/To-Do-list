@@ -350,7 +350,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "html,\nbody {\n  width: 60%;\n  margin: auto;\n  position: fixed;\n  top: 20%;\n  left: 30%;\n  transform: translate(-20%, -30%);\n}\n\n#toDoList {\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  border-radius: 4px;\n  box-shadow: 5px 5px 5px 5px rgba(0, 0, 255, 0.2);\n}\n\n.title-list {\n  display: flex;\n  flex-direction: row-reverse;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 20px;\n}\n\n.container > form {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  border: 1px solid rgba(0, 0, 255, 0.2);\n  padding: 20px;\n}\n\n.container > form > .input {\n  border: none;\n  font-style: italic;\n}\n\n.container > form > .button-list {\n  border: 1px solid rgba(210, 210, 230, 0.2);\n  padding: 4px;\n  border-radius: 4px;\n}\n\n.list-section {\n  max-width: 100%;\n  border: 1px solid rgba(175, 175, 187, 0.733);\n  margin: 0;\n  padding: 0;\n}\n\n.list-section > li {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  border-bottom: 1px solid rgba(175, 175, 187, 0.733);\n  max-width: 100%;\n  padding: 0 20px;\n}\n\n.list-section > li > .checkbox {\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n}\n\n.container > .clear-all {\n  border: 1px solid rgba(242, 242, 248, 0.918);\n  max-width: 100%;\n  padding: 20px;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  font-size: 16px;\n  color: rgba(138, 138, 148, 0.733);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "html,\nbody {\n  width: 60%;\n  margin: auto;\n  position: fixed;\n  top: 20%;\n  left: 30%;\n  transform: translate(-20%, -30%);\n}\n\n#toDoList {\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  border-radius: 4px;\n  box-shadow: 5px 5px 5px 5px rgba(0, 0, 255, 0.2);\n}\n\n.title-list {\n  display: flex;\n  flex-direction: row-reverse;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 20px;\n}\n\n.container > form {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  border: 1px solid rgba(0, 0, 255, 0.2);\n  padding: 20px;\n}\n\n.container > form > .input {\n  border: none;\n  font-style: italic;\n}\n\n.container > form > .button-list {\n  border: 1px solid rgba(210, 210, 230, 0.2);\n  padding: 6px;\n  border-radius: 10px;\n}\n\n.list-section {\n  max-width: 100%;\n  border: 1px solid rgba(175, 175, 187, 0.733);\n  margin: 0;\n  padding: 0;\n}\n\n.list-section > li {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  border-bottom: 1px solid rgba(175, 175, 187, 0.733);\n  max-width: 100%;\n  padding: 0 20px;\n}\n\n.list-section > li > .checkbox {\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n}\n\n.container > .clear-all {\n  border: 1px solid rgba(242, 242, 248, 0.918);\n  max-width: 100%;\n  padding: 20px;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  font-size: 16px;\n  color: rgba(138, 138, 148, 0.733);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -556,9 +556,7 @@ const heading = document.createElement('h1');
 heading.classList.add('head');
 heading.textContent = 'To-Do list';
 topSection.appendChild(heading);
-// const formSection = document.getElementById('InputContent');
 
-// const buttonList = document.getElementById('buttonList');
 const divList = document.createElement('div');
 divList.id = 'div-list';
 toDoContainer.appendChild(divList);
@@ -567,41 +565,119 @@ const listItems = document.createElement('ul');
 listItems.classList.add('list-section');
 divList.appendChild(listItems);
 
-// const list = document.createElement('li');
-// list.classList.add('list-self');
-// console.log(list);
-// listItems.appendChild(list);
-
 const clearButton = document.createElement('button');
 clearButton.classList.add('clear-all');
 clearButton.type = 'button';
-clearButton.textContent = 'clear all completed';
+clearButton.textContent = 'Clear all completed';
 toDoContainer.appendChild(clearButton);
 
-const todo = [
-  {
-    description: 'walk',
-    completed: false,
-    index: 1,
-  },
-  {
-    description: 'work-out',
-    completed: false,
-    index: 2,
-  },
+let todo = [
 ];
-for (let i = 0; i < 2; i += 1) {
-  const addTodo = todo[i];
-  listItems.innerHTML += `
-     <li class="item">
-     <div class= "checkbox">
-     <input type="checkbox" class="ch"></input>
-     <p class="text">${addTodo.description}</p>
-     </div>
-     <span><i class="fa-solid fa-ellipsis-vertical"></i></span>
-     </li>
-     `;
+
+const addToLocalStorage = () => {
+  localStorage.setItem('newTasks', JSON.stringify(todo));
+};
+
+const getFromLocalStorage = () => {
+  if (localStorage.getItem('newTasks')) {
+    todo = JSON.parse(localStorage.getItem('newTasks'));
+  }
+  return todo;
+};
+
+const removeFromLocalStorage = (index) => {
+  localStorage.removeItem('newTasks');
 }
+
+// const rmvTask = (index) => {
+//   const mylocal = getFromLocalStorage();
+//   mylocal.splice(index - 1, 1);
+//   addToLocalStorage();
+//   displayTasks();
+// };
+
+const addButton = document.querySelector('.button-list');
+const inputField = document.querySelector('.input');
+
+const displayTasks = () => {
+  listItems.innerHTML = '';
+  const mylocal = getFromLocalStorage();
+
+  for (let i = 0; i < mylocal.length; i += 1) {
+    const addTodo = todo[i];
+    listItems.innerHTML += `
+        <li class="item" id="${i}">
+          <div class= "checkbox">
+            <input type="checkbox" class="ch"></input>
+            <p class="text" id="textId">${addTodo.description}</p>
+          </div>
+          <span><i id="delete"class="fa-solid fa-trash"></i></span>
+        </li>
+        `;
+        
+        
+      }
+  toDoContainer.addEventListener('click', (e) =>{
+      const editText = e.target.id;
+        if (editText === 'textId') {
+          editContent(e.target)
+          console.log('hello');
+          
+        }
+      });
+      
+      
+      toDoContainer.addEventListener('click', (e) => {
+        const icon = e.target.id;
+        if (icon === 'delete') {
+          removeIcon(e.target);
+          removeFromLocalStorage(index);
+          console.log(index);
+
+        // rmvTask();
+
+
+    };
+    
+  })
+
+  // const deleteBTN = document.getElementById('delete');
+  // deleteBTN.addEventListener('click', (e) => {
+  //   console.log('hello');
+  //   if (e.target.id === 'delete') {
+  //     rmvTask(e.index);
+  //   }
+  // });
+};
+const removeIcon = (iconItem) => {
+  iconItem.parentNode.parentNode.remove();
+}
+
+const editContent = (para) => {
+  para.contentEditable = true;
+}
+
+const addTodo = () => {
+  const lengt = todo.length;
+  todo.push({
+    index: lengt + 1,
+    description: inputField.value,
+    completed: false,
+  });
+  addToLocalStorage();
+  inputField.value = '';
+};
+
+addButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  addTodo();
+  displayTasks();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  getFromLocalStorage();
+  displayTasks();
+});
 
 })();
 

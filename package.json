@@ -4,8 +4,7 @@
   "description": "My To-Do list project",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack",
-    "start": "webpack",
+    "start": "webpack serve --open",
     "build": "webpack"
   },
   "repository": {
