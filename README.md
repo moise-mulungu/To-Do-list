@@ -24,7 +24,7 @@
 
 [github page](https://github.com/moise-mulungu/To-Do-list)
 
-[live demo]( https://moise-mulungu.github.io/To-Do-list/)
+[live demo](https://moise-mulungu.github.io/To-Do-list/)
 
 ## Getting Started
 

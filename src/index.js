@@ -1,4 +1,5 @@
 import './style.css';
+import completeTask from './modules/complete.js'; 
 
 const toDoContainer = document.querySelector('.container');
 const topSection = document.querySelector('.title-list');
@@ -38,6 +39,7 @@ const updateIndex = () => {
 };
 const addButton = document.querySelector('.button-list');
 const inputField = document.querySelector('.input');
+
 const displayTasks = () => {
   listItems.replaceChildren();
   const mylocal = getFromLocalStorage();
@@ -102,15 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
   getFromLocalStorage();
   displayTasks();
 });
-const completeTask = (status, item) => {
-  const itemId = Number(item.parentNode.parentNode.id);
-  todo[itemId].completed = status;
-  addToLocalStorage();
-};
+
 const completeStatus = () => {
   document.addEventListener('click', (event) => {
     if (event.target.id === 'checkbox') {
-      completeTask(event.target.checked, event.target);
+      completeTask(event.target.checked, event.target, todo);
+      addToLocalStorage();
     }
   });
 };
