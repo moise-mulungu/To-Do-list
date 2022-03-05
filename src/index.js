@@ -1,5 +1,5 @@
 import './style.css';
-import completeTask from './modules/complete.js'; 
+import completeTask from './modules/complete.js';
 
 const toDoContainer = document.querySelector('.container');
 const topSection = document.querySelector('.title-list');
