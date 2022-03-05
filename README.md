@@ -5,11 +5,11 @@
 
 ![](file:///home/moise/To-Do-list/dist/index.html)
 
-# To-Do list: add and remove
+# To-Do list: interactive list
 
 > This my To-Do list first project. 
 
-![screenshot](img/add-remove.png).
+![screenshot](img/complete.png).
 
 ## Built With
 
@@ -24,7 +24,7 @@
 
 [github page](https://github.com/moise-mulungu/To-Do-list)
 
-[live demo]( https://moise-mulungu.github.io/To-Do-list/)
+[live demo](https://moise-mulungu.github.io/To-Do-list/)
 
 ## Getting Started
 
@@ -35,6 +35,8 @@ git clone  https://github.com/moise-mulungu/To-Do-list
 To make how it works, use webpack dev-server from your local.
 
 in this app a user is able to add, remove and edit any task.
+He can click on the checkbox to make sure the task is completed
+He can finally use the clear button to remove the checked tasks.
 
 ## Author
 

@@ -472,6 +472,21 @@ module.exports = function (cssWithMappingToString) {
   return list;
 };
 
+/***/ }),
+/* 11 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((status, item, todo) => {
+    const itemId = Number(item.parentNode.parentNode.id);
+    todo[itemId].completed = status;
+});
+
+
 /***/ })
 /******/ 	]);
 /************************************************************************/
@@ -546,117 +561,94 @@ var __webpack_exports__ = {};
 (() => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-// import _ from 'lodash';
+/* harmony import */ var _modules_complete_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
 
+ 
 
 const toDoContainer = document.querySelector('.container');
-
 const topSection = document.querySelector('.title-list');
 const heading = document.createElement('h1');
 heading.classList.add('head');
 heading.textContent = 'To-Do list';
 topSection.appendChild(heading);
-
 const divList = document.createElement('div');
 divList.id = 'div-list';
 toDoContainer.appendChild(divList);
-
 const listItems = document.createElement('ul');
 listItems.classList.add('list-section');
 divList.appendChild(listItems);
-
 const clearButton = document.createElement('button');
 clearButton.classList.add('clear-all');
+clearButton.id = 'clear';
+clearButton.style.cursor = 'pointer';
 clearButton.type = 'button';
 clearButton.textContent = 'Clear all completed';
 toDoContainer.appendChild(clearButton);
-
-let todo = [
-];
-
+let todo = [];
 const addToLocalStorage = () => {
   localStorage.setItem('newTasks', JSON.stringify(todo));
 };
-
 const getFromLocalStorage = () => {
   if (localStorage.getItem('newTasks')) {
     todo = JSON.parse(localStorage.getItem('newTasks'));
   }
   return todo;
 };
-
-const removeFromLocalStorage = (index) => {
-  localStorage.removeItem('newTasks');
-}
-
-// const rmvTask = (index) => {
-//   const mylocal = getFromLocalStorage();
-//   mylocal.splice(index - 1, 1);
-//   addToLocalStorage();
-//   displayTasks();
-// };
-
+const updateIndex = () => {
+  todo.map((a) => {
+    const index = todo.indexOf(a);
+    a.index = index + 1;
+    return a;
+  });
+};
 const addButton = document.querySelector('.button-list');
 const inputField = document.querySelector('.input');
 
 const displayTasks = () => {
-  listItems.innerHTML = '';
+  listItems.replaceChildren();
   const mylocal = getFromLocalStorage();
-
   for (let i = 0; i < mylocal.length; i += 1) {
     const addTodo = todo[i];
     listItems.innerHTML += `
         <li class="item" id="${i}">
           <div class= "checkbox">
-            <input type="checkbox" class="ch"></input>
+            <input type="checkbox" id="checkbox"></input>
             <p class="text" id="textId">${addTodo.description}</p>
           </div>
-          <span><i id="delete"class="fa-solid fa-trash"></i></span>
+          <span><i id="delete" class="fa-solid fa-trash"></i></span>
         </li>
         `;
-        
-        
-      }
-  toDoContainer.addEventListener('click', (e) =>{
-      const editText = e.target.id;
-        if (editText === 'textId') {
-          editContent(e.target)
-          console.log('hello');
-          
+  }
+  const editContent = (para, value) => {
+    const itemId = Number(para.parentNode.parentNode.id);
+    todo[itemId].description = value;
+    addToLocalStorage();
+  };
+  toDoContainer.addEventListener('click', () => {
+    document.addEventListener('keydown', (e) => {
+      e.target.contentEditable = true;
+      if (e.target.id === 'textId') {
+        if (e.key === 'Enter') {
+          editContent(e.target, e.target.innerHTML);
         }
-      });
-      
-      
-      toDoContainer.addEventListener('click', (e) => {
-        const icon = e.target.id;
-        if (icon === 'delete') {
-          removeIcon(e.target);
-          removeFromLocalStorage(index);
-          console.log(index);
-
-        // rmvTask();
-
-
-    };
-    
-  })
-
-  // const deleteBTN = document.getElementById('delete');
-  // deleteBTN.addEventListener('click', (e) => {
-  //   console.log('hello');
-  //   if (e.target.id === 'delete') {
-  //     rmvTask(e.index);
-  //   }
-  // });
+      }
+    });
+  });
 };
-const removeIcon = (iconItem) => {
-  iconItem.parentNode.parentNode.remove();
-}
-
-const editContent = (para) => {
-  para.contentEditable = true;
-}
-
+const removeIcon = (item) => {
+  const itemId = Number(item.parentNode.parentNode.id);
+  const newId = itemId + 1;
+  todo = todo.filter((a) => a.index !== newId);
+  updateIndex();
+  addToLocalStorage();
+};
+toDoContainer.addEventListener('click', (e) => {
+  const icon = e.target.id;
+  if (icon === 'delete') {
+    removeIcon(e.target);
+    displayTasks();
+  }
+});
 const addTodo = () => {
   const lengt = todo.length;
   todo.push({
@@ -667,16 +659,35 @@ const addTodo = () => {
   addToLocalStorage();
   inputField.value = '';
 };
-
 addButton.addEventListener('click', (e) => {
   e.preventDefault();
   addTodo();
   displayTasks();
 });
-
 document.addEventListener('DOMContentLoaded', () => {
   getFromLocalStorage();
   displayTasks();
+});
+
+const completeStatus = () => {
+  document.addEventListener('click', (event) => {
+    if (event.target.id === 'checkbox') {
+      (0,_modules_complete_js__WEBPACK_IMPORTED_MODULE_1__["default"])(event.target.checked, event.target, todo);
+      addToLocalStorage();
+    }
+  });
+};
+const clearCompletedTask = () => {
+  todo = todo.filter((t) => t.completed !== true);
+  addToLocalStorage();
+  updateIndex();
+  displayTasks();
+};
+completeStatus();
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'clear') {
+    clearCompletedTask();
+  }
 });
 
 })();
