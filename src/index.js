@@ -27,7 +27,7 @@ toDoContainer.appendChild(clearButton);
 
 let todo = [];
 
-// local storage 
+// local storage
 const addToLocalStorage = () => {
   localStorage.setItem('newTasks', JSON.stringify(todo));
 };
