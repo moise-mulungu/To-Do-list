@@ -350,7 +350,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "html,\nbody {\n  width: 60%;\n  margin: auto;\n  position: fixed;\n  top: 20%;\n  left: 30%;\n  transform: translate(-20%, -30%);\n}\n\n#toDoList {\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  border-radius: 4px;\n  box-shadow: 5px 5px 5px 5px rgba(0, 0, 255, 0.2);\n}\n\n.title-list {\n  display: flex;\n  flex-direction: row-reverse;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 20px;\n}\n\n.container > form {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  border: 1px solid rgba(0, 0, 255, 0.2);\n  padding: 20px;\n}\n\n.container > form > .input {\n  border: none;\n  font-style: italic;\n}\n\n.container > form > .button-list {\n  border: 1px solid rgba(210, 210, 230, 0.2);\n  padding: 6px;\n  border-radius: 10px;\n}\n\n.list-section {\n  max-width: 100%;\n  border: 1px solid rgba(175, 175, 187, 0.733);\n  margin: 0;\n  padding: 0;\n}\n\n.list-section > li {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  border-bottom: 1px solid rgba(175, 175, 187, 0.733);\n  max-width: 100%;\n  padding: 0 20px;\n}\n\n.list-section > li > .checkbox {\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n}\n\n.container > .clear-all {\n  border: 1px solid rgba(242, 242, 248, 0.918);\n  max-width: 100%;\n  padding: 20px;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  font-size: 16px;\n  color: rgba(138, 138, 148, 0.733);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "html,\nbody {\n  width: 60%;\n  margin: auto;\n  position: fixed;\n  top: 20%;\n  left: 30%;\n  transform: translate(-20%, -30%);\n}\n\n#toDoList {\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  border-radius: 4px;\n  box-shadow: 5px 5px 5px 5px rgba(0, 0, 255, 0.2);\n}\n\n.title-list {\n  display: flex;\n  flex-direction: row-reverse;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 20px;\n}\n\n.container > form {\n  display: flex;\n  /* flex-direction: row; */\n  justify-content: space-between;\n  align-items: center;\n  border: 1px solid rgba(0, 0, 255, 0.2);\n  padding: 20px;\n}\n\n.container > form > .input {\n  border: none;\n  font-style: italic;\n  max-width: 100%;\n}\n\n.container > form > .button-list {\n  border: 1px solid rgba(210, 210, 230, 0.2);\n  padding: 6px;\n  border-radius: 10px;\n}\n\n.list-section {\n  max-width: 100%;\n  border: 1px solid rgba(175, 175, 187, 0.733);\n  margin: 0;\n  padding: 0;\n}\n\n.list-section > li {\n  display: flex;\n  /* flex-direction: row; */\n  justify-content: space-between;\n  align-items: center;\n  border-bottom: 1px solid rgba(175, 175, 187, 0.733);\n  max-width: 100%;\n  padding: 0 20px;\n}\n\n.list-section > li > .checkbox {\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n}\n\n.container > .clear-all {\n  border: 1px solid rgba(242, 242, 248, 0.918);\n  max-width: 100%;\n  padding: 20px;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  font-size: 16px;\n  color: rgba(138, 138, 148, 0.733);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -480,10 +480,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((status, item, todo) => {
-    const itemId = Number(item.parentNode.parentNode.id);
-    todo[itemId].completed = status;
+  const itemId = Number(item.parentNode.parentNode.id);
+  todo[itemId].completed = status;
 });
 
 
@@ -563,20 +562,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _modules_complete_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
 
- 
+
 
 const toDoContainer = document.querySelector('.container');
+
 const topSection = document.querySelector('.title-list');
 const heading = document.createElement('h1');
 heading.classList.add('head');
 heading.textContent = 'To-Do list';
 topSection.appendChild(heading);
+
 const divList = document.createElement('div');
 divList.id = 'div-list';
 toDoContainer.appendChild(divList);
+
 const listItems = document.createElement('ul');
 listItems.classList.add('list-section');
 divList.appendChild(listItems);
+
 const clearButton = document.createElement('button');
 clearButton.classList.add('clear-all');
 clearButton.id = 'clear';
@@ -584,16 +587,21 @@ clearButton.style.cursor = 'pointer';
 clearButton.type = 'button';
 clearButton.textContent = 'Clear all completed';
 toDoContainer.appendChild(clearButton);
+
 let todo = [];
+
+// local storage 
 const addToLocalStorage = () => {
   localStorage.setItem('newTasks', JSON.stringify(todo));
 };
+
 const getFromLocalStorage = () => {
   if (localStorage.getItem('newTasks')) {
     todo = JSON.parse(localStorage.getItem('newTasks'));
   }
   return todo;
 };
+
 const updateIndex = () => {
   todo.map((a) => {
     const index = todo.indexOf(a);
@@ -601,6 +609,7 @@ const updateIndex = () => {
     return a;
   });
 };
+
 const addButton = document.querySelector('.button-list');
 const inputField = document.querySelector('.input');
 
@@ -635,6 +644,7 @@ const displayTasks = () => {
     });
   });
 };
+
 const removeIcon = (item) => {
   const itemId = Number(item.parentNode.parentNode.id);
   const newId = itemId + 1;
@@ -642,6 +652,7 @@ const removeIcon = (item) => {
   updateIndex();
   addToLocalStorage();
 };
+
 toDoContainer.addEventListener('click', (e) => {
   const icon = e.target.id;
   if (icon === 'delete') {
@@ -649,6 +660,7 @@ toDoContainer.addEventListener('click', (e) => {
     displayTasks();
   }
 });
+
 const addTodo = () => {
   const lengt = todo.length;
   todo.push({
@@ -659,11 +671,13 @@ const addTodo = () => {
   addToLocalStorage();
   inputField.value = '';
 };
+
 addButton.addEventListener('click', (e) => {
   e.preventDefault();
   addTodo();
   displayTasks();
 });
+
 document.addEventListener('DOMContentLoaded', () => {
   getFromLocalStorage();
   displayTasks();
@@ -677,6 +691,7 @@ const completeStatus = () => {
     }
   });
 };
+
 const clearCompletedTask = () => {
   todo = todo.filter((t) => t.completed !== true);
   addToLocalStorage();
@@ -684,6 +699,7 @@ const clearCompletedTask = () => {
   displayTasks();
 };
 completeStatus();
+
 document.addEventListener('click', (e) => {
   if (e.target.id === 'clear') {
     clearCompletedTask();
