@@ -6,7 +6,10 @@
   "scripts": {
     "start": "webpack serve --open",
     "build": "webpack",
-    "deploy": "gh-pages -d dist"
+    "dev": "webpack --mode development",
+    "deploy": "gh-pages -d dist",
+    "test": "jest",
+    "watch": "jest --watch *.js"
   },
   "repository": {
     "type": "git",

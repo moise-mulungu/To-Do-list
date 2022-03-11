@@ -91,6 +91,8 @@ const removeIcon = (item) => {
   addToLocalStorage();
 };
 
+// module.exports = {removeIcon}
+
 toDoContainer.addEventListener('click', (e) => {
   const icon = e.target.id;
   if (icon === 'delete') {
@@ -109,6 +111,7 @@ const addTodo = () => {
   addToLocalStorage();
   inputField.value = '';
 };
+// module.exports = {addTodo};
 
 addButton.addEventListener('click', (e) => {
   e.preventDefault();
