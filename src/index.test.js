@@ -9,6 +9,11 @@ const addTodo = (todo, value) => {
 
 const todo = [];
 
+const removeIcon = (newId, todo) => {
+  todo = todo.filter((a) => a.index !== newId);
+  return todo;
+};
+
 describe('testing the addTodo function', () => {
   test('check if items have been added to the list', () => {
     addTodo(todo, 'string');
@@ -22,6 +27,20 @@ describe('testing the addTodo function', () => {
   });
   test('check if items have been added to the list', () => {
     addTodo(todo, 'hello');
+
+    expect(todo[2].description).toEqual('hello');
+  });
+});
+
+describe('remove the removeIcon function', () => {
+  test('check if the selected items have been removed', () => {
+    removeIcon(2, todo);
+
+    expect(todo[0].index).toEqual(1);
+  });
+
+  test('check if the selected items have been removed', () => {
+    removeIcon(1, todo);
 
     expect(todo[2].description).toEqual('hello');
   });
