@@ -1,13 +1,16 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
 # To-Do list
+In this app a user is able to add, remove and edit any task.
+He can click on the checkbox to make sure the task is completed
+He can finally use the clear button to remove the checked tasks.
 
 
 ![](file:///home/moise/To-Do-list/dist/index.html)
 
-# To-Do list: interactive list
+# To-Do list-testing:
 
-> This my To-Do list first project. 
+> Test By Jest 
 
 ![screenshot](img/complete.png).
 
@@ -19,6 +22,7 @@
 - Webpack
 - Visual Studio Code.
 - Linters
+- Testing By jest
 
 ## Live Demo
 
@@ -34,9 +38,7 @@ git clone  https://github.com/moise-mulungu/To-Do-list
 ```
 To make how it works, use webpack dev-server from your local.
 
-in this app a user is able to add, remove and edit any task.
-He can click on the checkbox to make sure the task is completed
-He can finally use the clear button to remove the checked tasks.
+
 
 ## Author
 
@@ -45,6 +47,16 @@ He can finally use the clear button to remove the checked tasks.
 - GitHub: [Moise Mulungu](https://github.com/moise-mulungu)
 - Twitter: [Moise Mulungu](https://twitter.com/moise_mulungu)
 - LinkedIn: [Moise Mulungu](https://www.linkedin.com/in/mo%C3%AFse-mulungu-a939831b2/)
+
+👤  **Beyk**
+- GitHub: [Beyk](https://github.com/beyk)
+- Twitter: [Beyk](https://twitter.com/beyk_a)
+- LinkedIn: [Beyk](https://www.linkedin.com/in/asghar-beykmohammadi-1b16b291/)
+
+👤 **Stanley SIMEON**
+- GitHub: [Stanley Simeon](https://github.com/stanleySimeon)
+- Twitter: [Stanley Simeon](https://twitter.com/mstanleyme)
+- LinkedIn: [Stanley SIMEON](https://www.linkedin.com/in/stanleySimeon-881091224/)
 
 
 ## 🤝 Contributing
