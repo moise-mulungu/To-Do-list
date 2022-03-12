@@ -1,6 +1,6 @@
-import { addTodo, removeIcon } from './functions.js';
+import { addTodo, removeIcon, editContent, completeStatus, clearCompletedTask } from './functions.js';
 
-const todo = [];
+let todo = [];
 
 describe('Testing addTodo function', () => {
   test('check if the first value is added', () => {
@@ -30,3 +30,28 @@ describe('test the removeIcon function', () => {
     expect(todo.length).toBe(0);
   });
 });
+
+
+describe('test editContent function', ()=> {
+  test('check if the description is edited', () => {
+    addTodo(todo, 'micronaut');
+    addTodo(todo, 'microsoft');
+    addTodo(todo, 'micrometa');
+    editContent(todo, 'myself', 2);
+    expect(todo[2].description).toBe('myself')
+  })
+})
+
+describe('test completeStatus function', () => {
+  test('check if the tas is marked as complete', () => {
+    completeStatus(todo, 2, true);
+    expect(todo[2].completed).toBe(true);
+  })
+})
+
+describe('test the clearCompletedTask function', () => {
+  test('check if the clear all completed task works', () => {
+    todo = clearCompletedTask(todo);
+    expect(todo.length).toBe(2);
+  })
+})
