@@ -23,6 +23,7 @@ He can finally use the clear button to remove the checked tasks.
 - Visual Studio Code.
 - Linters
 - Testing By jest
+- Add Mock
 
 ## Live Demo
 
