@@ -14,23 +14,17 @@ const removeIcon = (todo, id) => {
 const editContent = (todo, input, index) => {
   todo[index].description = input;
   return todo;
-
-}
+};
 const completeStatus = (todo, index, input) => {
   todo[index].completed = input;
   return todo;
-
-}
+};
 
 const clearCompletedTask = (todo) => {
-  todo = todo.filter(task => {
-    return task.completed === false;
-  })
-  console.log(todo)
+  todo = todo.filter((task) => task.completed === false);
   return todo;
+};
 
-
-} 
-
-
-export { addTodo, removeIcon, editContent, completeStatus, clearCompletedTask };
+export {
+  addTodo, removeIcon, editContent, completeStatus, clearCompletedTask,
+};
