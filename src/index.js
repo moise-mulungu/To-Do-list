@@ -1,5 +1,6 @@
 import './style.css';
 import completeTask from './modules/complete.js';
+import { addTodo, removeIcon } from './modules/functions.js';
 
 const toDoContainer = document.querySelector('.container');
 
@@ -27,7 +28,6 @@ toDoContainer.appendChild(clearButton);
 
 let todo = [];
 
-// local storage
 const addToLocalStorage = () => {
   localStorage.setItem('newTasks', JSON.stringify(todo));
 };
@@ -56,12 +56,12 @@ const displayTasks = () => {
   for (let i = 0; i < mylocal.length; i += 1) {
     const addTodo = todo[i];
     listItems.innerHTML += `
-        <li class="item" id="${i}">
+        <li class="item" >
           <div class= "checkbox">
             <input type="checkbox" id="checkbox"></input>
             <p class="text" id="textId">${addTodo.description}</p>
           </div>
-          <span><i id="delete" class="fa-solid fa-trash"></i></span>
+          <span><i  id="${i}" class="fa-solid fa-trash delete"></i></span>
         </li>
         `;
   }
@@ -83,40 +83,29 @@ const displayTasks = () => {
   });
 };
 // remove function
-const removeIcon = (item) => {
-  const itemId = Number(item.parentNode.parentNode.id);
-  const newId = itemId + 1;
-  todo = todo.filter((a) => a.index !== newId);
-  updateIndex();
-  addToLocalStorage();
-};
-
-// module.exports = {removeIcon}
+// const removeIcon = (item) => {
+//   const itemId = Number(item.parentNode.parentNode.id);
+//   const newId = itemId + 1;
+//   todo = todo.filter((a) => a.index !== newId);
+//   updateIndex();
+//   addToLocalStorage();
+// };
 
 toDoContainer.addEventListener('click', (e) => {
-  const icon = e.target.id;
-  if (icon === 'delete') {
-    removeIcon(e.target);
+  const icon = e.target.classList;
+  if (icon.contains('delete')) {
+    removeIcon(todo, e.target.id);
+    addToLocalStorage();
     displayTasks();
   }
 });
-// add function
-const addTodo = () => {
-  const lengt = todo.length;
-  todo.push({
-    index: lengt + 1,
-    description: inputField.value,
-    completed: false,
-  });
-  addToLocalStorage();
-  inputField.value = '';
-};
-// module.exports = {addTodo};
 
 addButton.addEventListener('click', (e) => {
   e.preventDefault();
-  addTodo();
+  addTodo(todo, inputField.value);
+  addToLocalStorage();
   displayTasks();
+  inputField.value = '';
 });
 // loading section
 document.addEventListener('DOMContentLoaded', () => {
