@@ -82,14 +82,6 @@ const displayTasks = () => {
     });
   });
 };
-// remove function
-// const removeIcon = (item) => {
-//   const itemId = Number(item.parentNode.parentNode.id);
-//   const newId = itemId + 1;
-//   todo = todo.filter((a) => a.index !== newId);
-//   updateIndex();
-//   addToLocalStorage();
-// };
 
 toDoContainer.addEventListener('click', (e) => {
   const icon = e.target.classList;
